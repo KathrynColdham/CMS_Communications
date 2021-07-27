@@ -50,13 +50,13 @@ print Array
 #Plotting the density plot
 fig_10, axes_10 = plt.subplots()
 # Dfine data to use and color map
-im = axes_10.imshow(Array, cmap='Wistia')
+im = axes_10.imshow(Array, cmap='winter')
 
 # Add ticks at data points and labels
-axes_10.set_xticks(np.arange(len(Array_Age_Freq[1])))
-axes_10.set_yticks(np.arange(len(Array_Age_Freq[0])))
-axes_10.set_xticklabels(Array_Age_Freq[1])
-axes_10.set_yticklabels(Array_Age_Freq[0])
+axes_10.set_xticks(np.arange(len(Array_Age_Freq[0])))
+axes_10.set_yticks(np.arange(len(Array_Age_Freq[1])))
+axes_10.set_xticklabels(Array_Age_Freq[0])
+axes_10.set_yticklabels(Array_Age_Freq[1])
 
 # Rotate labels on the bottom so they don't overlap
 plt.setp(axes_10.get_xticklabels(), rotation=45, ha="right",
@@ -65,10 +65,6 @@ plt.setp(axes_10.get_xticklabels(), rotation=45, ha="right",
 # Loop over data dimensions and create text annotations.
 for i in range(len(Array_Age_Freq[1])):
     for j in range(len(Array_Age_Freq[0])):
-	print('i = ', i)
-	print('j = ', j)
-	print('len(Array_Age_Freq[0] = ', len(Array_Age_Freq[0]))
-  	print('len(Array_Age_Freq[1] = ', len(Array_Age_Freq[1]))
         text = axes_10.text(j, i, Array[i][j],
                        ha="center", va="center", color="k",fontweight="bold")
 

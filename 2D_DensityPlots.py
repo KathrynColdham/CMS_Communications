@@ -58,6 +58,8 @@ axes_10.set_yticks(np.arange(len(Array_Age_Freq[1])))
 axes_10.set_xticklabels(Array_Age_Freq[0])
 axes_10.set_yticklabels(Array_Age_Freq[1])
 
+axes_10.set_title('How often CDS is read')
+
 # Rotate labels on the bottom so they don't overlap
 plt.setp(axes_10.get_xticklabels(), rotation=45, ha="right",
          rotation_mode="anchor")

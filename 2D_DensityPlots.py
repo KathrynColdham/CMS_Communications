@@ -1,5 +1,8 @@
+from matplotlib import cm
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 #input csv file 
@@ -35,7 +38,6 @@ for i in range(len(Array_Age_Freq[0])):
 	Often = Age_Subset[Age_Subset['9. How often do you read the following webpages? [CERN Document Server (CDS)]'].str.contains(Array_Age_Freq[1][3])]
         Often_count = Never['9. How often do you read the following webpages? [CERN Document Server (CDS)]'].count()
 
-
 	Array[0][i] = Never_heard_count
 	Array[1][i] = Never_count
 	Array[2][i] = Occasionally_count
@@ -44,6 +46,31 @@ for i in range(len(Array_Age_Freq[0])):
 
 print Array
 
-#plotting the contour plot
-#plt.contour(Array_Age_Freq[1], Array_Age_Freq[0], Array)
-#plt.show()
+
+#Plotting the density plot
+fig_10, axes_10 = plt.subplots()
+# Dfine data to use and color map
+im = axes_10.imshow(Array, cmap='Wistia')
+
+# Add ticks at data points and labels
+axes_10.set_xticks(np.arange(len(Array_Age_Freq[1])))
+axes_10.set_yticks(np.arange(len(Array_Age_Freq[0])))
+axes_10.set_xticklabels(Array_Age_Freq[1])
+axes_10.set_yticklabels(Array_Age_Freq[0])
+
+# Rotate labels on the bottom so they don't overlap
+plt.setp(axes_10.get_xticklabels(), rotation=45, ha="right",
+         rotation_mode="anchor")
+
+# Loop over data dimensions and create text annotations.
+for i in range(len(Array_Age_Freq[1])):
+    for j in range(len(Array_Age_Freq[0])):
+	print('i = ', i)
+	print('j = ', j)
+	print('len(Array_Age_Freq[0] = ', len(Array_Age_Freq[0]))
+  	print('len(Array_Age_Freq[1] = ', len(Array_Age_Freq[1]))
+        text = axes_10.text(j, i, Array[i][j],
+                       ha="center", va="center", color="k",fontweight="bold")
+
+
+plt.show()

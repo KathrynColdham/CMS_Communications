@@ -57,5 +57,5 @@ mkdir 'Results_ScatterPlots'
 for i in ${!ColumnsArray[@]}; do
         python3 ScatterPlots.py --subset '2. In which age range do you fall under?' --compare "${ColumnsArray[i]}"
 	python3 ScatterPlots.py --subset '3. Are you currently resident (>50%) at CERN?' --compare "${ColumnsArray[i]}"
-
+	python3 ScatterPlots.py --subset '4. If you are not resident at CERN, in which country are you based?' --compare "${ColumnsArray[i]}"
 done

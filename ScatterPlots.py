@@ -264,6 +264,126 @@ elif CompareColumn == "12. How often do you read posts on the following social m
 	title = "How often posts are read on the CMS Young Scientist Committee's Facebook group"
 	PdfTitleStart = 'CMSYSCFacebook'
 	SecondColumnNumber = 59
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [CMS awards]":
+	title = "Sources for receiving info about CMS awards"
+	PdfTitleStart = 'CMSAwards'
+	SecondColumnNumber = 60
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [CMS public briefings]":
+	title = "Sources for receiving info about CMS public briefings" 
+	PdfTitleStart = 'Sources_CMSPublicBriefings' 
+	SecondColumnNumber = 61 
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Conferences]":
+	title = "Sources for receiving info about conferences"
+	PdfTitleStart = 'Sources_Conferences'	
+	SecondColumnNumber = 62
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [General announcements]":
+	title = "Sources for receiving info about general announcements"	
+	PdfTitleStart = 'Sources_GeneralAnnouncements'
+	SecondColumnNumber = 63
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Jobs]":
+	title = "Sources for receiving info about jobs"
+	PdfTitleStart = 'Sources_Jobs'
+	SecondColumnNumber = 64
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Meetings]":
+	title = "Sources for receiving info about meetings"
+	PdfTitleStart = 'Sources_Meetings'
+	SecondColumnNumber = 65
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Nominations]":
+	title = "Sources for receiving info about nominations"
+	PdfTitleStart = 'Sources_Nominations'
+	SecondColumnNumber = 66
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Safety alerts]":
+	title = "Sources for receiving info about safety alerts"
+	PdfTitleStart = 'Sources_SafetyAlerts'
+	SecondColumnNumber = 67
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Security alerts]":
+	title = "Sources for receiving info about security alerts"
+	PdfTitleStart = 'Sources_SecurityAlerts'
+	SecondColumnNumber = 68
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Social events]":
+	title = "Sources for receiving info about social events"
+	PdfTitleStart = 'Sources_SocialEvents'
+	SecondColumnNumber = 69
+elif CompareColumn == "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Publications]":
+	title = "Sources for receiving info about publications"
+	PdfTitleStart = 'Sources_Publications'
+	SecondColumnNumber = 70
+elif CompareColumn == "15. In the past two years, how often do you attended/read/watched the following? [CMS Week Monday plenary ]":
+	title = "Attendance of CMS Week Monday plenary"
+	PdfTitleStart = 'Attendance_CMSWeekMondayPlenary'
+	SecondColumnNumber = 72
+elif CompareColumn == "15. In the past two years, how often do you attended/read/watched the following? [Other CMS Week sessions]":
+	title = "Attendance of other CMS Week sessions"
+	PdfTitleStart = "Attendance_OtherCMSWeekSessions"
+	SecondColumnNumber = 73
+elif CompareColumn == "15. In the past two years, how often do you attended/read/watched the following? [Weekly General Meeting]":
+	title = "Attendance of the Weekly General Meeting"
+	PdfTitleStart = 'Attendance_WGM'
+	SecondColumnNumber = 74
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Discord]":
+	title = "Preference of using Discord"
+	PdfTitleStart = "Preference_Discord"
+	SecondColumnNumber = 75
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Facebook messenger]":
+	title = "Preference of using Facebook messenger"
+	PdfTitleStart = 'Preference_FacebookMessenger'
+	SecondColumnNumber = 76
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Mattermost]":
+	title = "Preference of using Mattermost"
+	PdfTitleStart = 'Preference_Mattermost'
+	SecondColumnNumber = 77
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Skype]":
+	title = "Preference of using Skype"
+	PdfTitleStart = 'Preference_Skype'
+	SecondColumnNumber = 78
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Signal]":
+	title = "Preference of using Signal"
+	PdfTitleStart = 'Preference_Signal'
+	SecondColumnNumber = 79
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Slack]":
+	title = "Preference of using Slack"
+	PdfTitleStart = 'Preference_Slack'
+	SecondColumnNumber = 80
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Whatsapp]":
+	title = "Preference of using Whatsapp"
+	PdfTitleStart = 'Preference_Whatsapp'
+	SecondColumnNumber = 81
+elif CompareColumn == "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Other]":
+	title = "Preference of using other messaging applications"
+	PdfTitleStart = 'Preference_Other'
+	SecondColumnNumber = 82
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Accesibility of information]":
+	title = "Satisfaction of accessibility of information" 
+	PdfTitleStart = "Satisfaction_AccessibilityOfInfo"
+	SecondColumnNumber = 84
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Accuracy of content]":
+	title = "Satisfaction of accuracy of content"
+	PdfTitleStart = "Satisfaction_AccuracyOfContent"
+	SecondColumnNumber = 85
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Amount of information]":
+	title = "Satisfaction of amount of information"
+	PdfTitleStart = "Satisfaction_AmountOfInfo"
+	SecondColumnNumber = 86
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Clarity of information]":
+	title = "Satisfaction of clarity of information"
+	PdfTitleStart = "Satisfaction_ClarityOfInfo"
+	SecondColumnNumber = 87
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Frequency of delivery of information]":
+	title = "Satisfaction of the frequency of delivery of information"
+	PdfTitleStart = "Satisfaction_FrequencyOfDelivery"	
+	SecondColumnNumber = 88
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Frequency of receipt of information]":
+	title = "Satisfaction of the frequency of receipt of information"
+	PdfTitleStart = "Satisfaction_FrequencyOfReceipt"
+	SecondColumnNumber = 89
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Relevance of material]":
+	title = "Satisfaction of the relevance of material"
+	PdfTitleStart = "Satisfaction_RelevanceOfMaterial"
+	SecondColumnNumber = 90
+elif CompareColumn == "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Style of presentation]":
+	title = "Satisfaction of the style of presentation"
+	PdfTitleStart = "Satisfaction_StyleOfPresentation"
+	SecondColumnNumber = 91 
 else:
 	print('ERROR: Check the name of the column you want to compare to')
 	quit()

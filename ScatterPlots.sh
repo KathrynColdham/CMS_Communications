@@ -50,12 +50,51 @@ ColumnsArray=('9. How often do you read the following webpages? [CERN Document S
 	      "12. How often do you read posts on the following social media accounts?  [CMS experiment's YouTube Channel (https://www.youtube.com/user/CMSExperimentTV )]"
 	      "12. How often do you read posts on the following social media accounts?  [CMS Muon Group's Twitter account (https://twitter.com/CmsMuon)]"
 	      "12. How often do you read posts on the following social media accounts?  [CMS Publications Twitter account (https://twitter.com/CMSpapers)]"
-	      "12. How often do you read posts on the following social media accounts?  [CMS Young Scientist Committee's Facebook group (https://www.facebook.com/groups/843805749716562)]")
+	      "12. How often do you read posts on the following social media accounts?  [CMS Young Scientist Committee's Facebook group (https://www.facebook.com/groups/843805749716562)]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [CMS awards]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [CMS public briefings]"
+              "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Conferences]"
+              "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [General announcements]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Jobs]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Meetings]"
+              "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Nominations]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Safety alerts]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Security alerts]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Social events]"
+	      "13. Which platform(s) is/are your main source(s) for receiving information about the following collaboration announcements?  Please scroll to the right to see all options. [Publications]"
+	      "15. In the past two years, how often do you attended/read/watched the following? [CMS Week Monday plenary ]"
+	      "15. In the past two years, how often do you attended/read/watched the following? [Other CMS Week sessions]"
+	      "15. In the past two years, how often do you attended/read/watched the following? [Weekly General Meeting]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Discord]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Facebook messenger]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Mattermost]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Skype]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Signal]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Slack]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Whatsapp]"
+	      "16. Please indicate your favourite three messaging applications for messaging other members of the CMS collaboration (1 = preferred application). [Other]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Accesibility of information]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Accuracy of content]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Amount of information]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Clarity of information]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Frequency of delivery of information]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Frequency of receipt of information]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Relevance of material]"
+	      "18. In general, how satisfied are you with the following aspects of CMS internal communication as a whole? [Style of presentation]")
 
-mkdir 'Results_ScatterPlots'
+
+
+if [ ! -d Results_ScatterPlots ]; then
+  mkdir Results_ScatterPlots;
+fi
+
 
 for i in ${!ColumnsArray[@]}; do
         python3 ScatterPlots.py --subset '2. In which age range do you fall under?' --compare "${ColumnsArray[i]}"
 	python3 ScatterPlots.py --subset '3. Are you currently resident (>50%) at CERN?' --compare "${ColumnsArray[i]}"
 	python3 ScatterPlots.py --subset '4. If you are not resident at CERN, in which country are you based?' --compare "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --subset '5. In which country is your home institute, if different from the country in which you are based?' --compare "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --subset '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --compare "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --subset '7. Which of the following areas of CMS are you involved in? ' --compare "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --subset '8. If you answered "other" for question 7, please list the area(s) of CMS that you are involved in here.' --compare "${ColumnsArray[i]}"
 done

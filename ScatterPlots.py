@@ -2,6 +2,7 @@ import tkinter
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import argparse
 import os
 
@@ -42,7 +43,7 @@ elif SubsetColumn == '6. Approximately, what was your percentage of presence at 
 	PdfTitleEnd = 'CERNPercentagePresence'
 	axis_label = '% presence'
 	FirstColumnNumber = 6
-elif SubsetColumn == '7. Which of the following areas of CMS are you involved in?' :
+elif SubsetColumn == '7. Which of the following areas of CMS are you involved in? ' :
 	end = ' by CMS area'	
 	PdfTitleEnd = 'CMSArea'
 	axis_label = 'CMS Area'
@@ -273,11 +274,16 @@ def reader(filename):
 	np_arr = df.values
 	x_1 = np_arr[:, FirstColumnNumber]
 	y_1 = np_arr[:, SecondColumnNumber]
+	#np.where(pd.isna(x_1), "No response", x_1) #if the array contains nan values, convert them into strings
+	where_are_NaNs = pd.isna(x_1)
+	print('where_are_NaNs = ', where_are_NaNs)
+	x_1[where_are_NaNs] = 'nan'
 	print('x_1 = ',x_1)
 	plt.scatter(x_1, y_1, color='green', marker="s", alpha=0.3)
 	plt.title(title + end)
 	plt.xlabel(axis_label)
 	plt.ylabel('Frequency')
+	plt.xticks(rotation = 90)
 	
 	if not os.path.exists('Results_ScatterPlots'):
 		os.mkdir('Results_ScatterPlots')

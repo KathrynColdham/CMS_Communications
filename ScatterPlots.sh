@@ -91,10 +91,10 @@ fi
 
 for i in ${!ColumnsArray[@]}; do
         python3 ScatterPlots.py --subset '2. In which age range do you fall under?' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '3. Are you currently resident (>50%) at CERN?' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '4. If you are not resident at CERN, in which country are you based?' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '5. In which country is your home institute, if different from the country in which you are based?' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '7. Which of the following areas of CMS are you involved in? ' --compare "${ColumnsArray[i]}"
-	python3 ScatterPlots.py --subset '8. If you answered "other" for question 7, please list the area(s) of CMS that you are involved in here.' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '3. Are you currently resident (>50%) at CERN?' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '4. If you are not resident at CERN, in which country are you based?' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '5. In which country is your home institute, if different from the country in which you are based?' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '7. Which of the following areas of CMS are you involved in? ' --compare "${ColumnsArray[i]}"
+#	python3 ScatterPlots.py --subset '8. If you answered "other" for question 7, please list the area(s) of CMS that you are involved in here.' --compare "${ColumnsArray[i]}"
 done

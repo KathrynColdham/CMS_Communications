@@ -389,22 +389,30 @@ else:
 	quit()
 
 def reader(filename):
+
 	df = pd.read_csv(filename)
 	df = df.sort_values(by=[SubsetColumn, CompareColumn])
+
 	np_arr = df.values
+
 	x_1 = np_arr[:, FirstColumnNumber]
 	y_1 = np_arr[:, SecondColumnNumber]
-	#np.where(pd.isna(x_1), "No response", x_1) #if the array contains nan values, convert them into strings
+
 	where_are_NaNs = pd.isna(x_1)
-	print('where_are_NaNs = ', where_are_NaNs)
 	x_1[where_are_NaNs] = 'nan'
-	print('x_1 = ',x_1)
-	plt.scatter(x_1, y_1, color='green', marker="s", alpha=0.3)
+
+	colourmap = plt.cm.bwr 
+	normalize = matplotlib.colors.Normalize(vmin=-1, vmax=1)
+
+	sc = plt.scatter(x_1, y_1, cmap=colourmap, norm=normalize, marker="s", alpha=0.3)
 	plt.title(title + end)
 	plt.xlabel(axis_label)
 	plt.ylabel('Frequency')
 	plt.xticks(rotation = 90)
 	
+	cbar= plt.colorbar(sc)
+	cbar.set_label("Responses (normalised)", labelpad=+1)
+
 	if not os.path.exists('Results_ScatterPlots'):
 		os.mkdir('Results_ScatterPlots')
 

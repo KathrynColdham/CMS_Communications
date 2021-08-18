@@ -91,7 +91,7 @@ fi
 
 for i in ${!ColumnsArray[@]}; do
         python3 ScatterPlots.py --first '2. In which age range do you fall under?' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '3. Are you currently resident (>50%) at CERN?' --second "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --first '3. Are you currently resident (>50%) at CERN?' --second "${ColumnsArray[i]}"
 #	python3 ScatterPlots.py --first '4. If you are not resident at CERN, in which country are you based?' --second "${ColumnsArray[i]}"
 #	python3 ScatterPlots.py --first '5. In which country is your home institute, if different from the country in which you are based?' --second "${ColumnsArray[i]}"
 #	python3 ScatterPlots.py --first '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --second "${ColumnsArray[i]}"

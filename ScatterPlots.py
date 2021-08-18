@@ -394,17 +394,17 @@ def reader(filename):
 	df = df.sort_values(by=[SubsetColumn, CompareColumn])
 
 	np_arr = df.values
-
+	
 	x_1 = np_arr[:, FirstColumnNumber]
 	y_1 = np_arr[:, SecondColumnNumber]
 
 	where_are_NaNs = pd.isna(x_1)
 	x_1[where_are_NaNs] = 'nan'
 
-	colourmap = plt.cm.bwr 
 	normalize = matplotlib.colors.Normalize(vmin=-1, vmax=1)
-
-	sc = plt.scatter(x_1, y_1, cmap=colourmap, norm=normalize, marker="s", alpha=0.3)
+	colormap = matplotlib.cm.viridis
+	
+	sc = plt.scatter(x_1, y_1, norm=normalize, cmap=colormap, marker="s")
 	plt.title(title + end)
 	plt.xlabel(axis_label)
 	plt.ylabel('Frequency')

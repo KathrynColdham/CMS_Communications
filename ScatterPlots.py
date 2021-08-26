@@ -465,7 +465,7 @@ def reader(filename):
 		new_counts = counts.groupby(level=1).apply(lambda x:100 * x / float(x.sum()))
 
 		# Make the plot
-		sc = plt.scatter(counts.index.get_level_values(1), counts.index.get_level_values(0), c=counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
+		sc = plt.scatter(new_counts.index.get_level_values(1), new_counts.index.get_level_values(0), c=new_counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
 
 	# Cosmetics
 	plt.title(title + end)
@@ -487,4 +487,5 @@ def reader(filename):
 
 if __name__ == '__main__':
 	reader('CMSInternalCommunicationsFeedbackForm.csv')
+
 

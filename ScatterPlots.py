@@ -459,13 +459,13 @@ def reader(filename):
     			# append that data frame 
 			new_responses = new_responses.append(tmp)
     
-			counts = new_responses.groupby([Col2, Col1]).agg({Col1:'count'})
+		counts = new_responses.groupby([Col2, Col1]).agg({Col1:'count'})
 
-			# convert to percentage
-			new_counts = counts.groupby(level=1).apply(lambda x:100 * x / float(x.sum()))
+		# convert to percentage
+		new_counts = counts.groupby(level=1).apply(lambda x:100 * x / float(x.sum()))
 
-			# Make the plot
-			sc = plt.scatter(counts.index.get_level_values(1), counts.index.get_level_values(0), c=counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
+		# Make the plot
+		sc = plt.scatter(counts.index.get_level_values(1), counts.index.get_level_values(0), c=counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
 
 	# Cosmetics
 	plt.title(title + end)

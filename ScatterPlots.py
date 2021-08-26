@@ -390,88 +390,79 @@ else:
 
 def reader(filename):
 
-	# Read the data file
-	df_original = pd.read_csv(filename)
-	
-	# Sort by the two relevant columns
-	df = df_original.sort_values(by=[Col1, Col2])
-
-	# Skim the dataframe
-	df = df[[Col1, Col2]]
-
-	# Count and remove duplicates
-	df = df.groupby(df.columns.tolist()).size().reset_index().rename(columns={0:"Counts"})
-
-	# Form an numpy array
-	np_arr = df.values
-
-	#print('np_arr = ',np_arr)
-
-	# Split into three
-	x = np_arr[:, 0]
-	y = np_arr[:, 1]
-	counts = np_arr[:, 2]
-
-	y_CMSAreas = []
-	counts_CMSAreas = []
-
-	#Need to complete this section to further filter the CMS areas plots
-	if FirstColumnNumber == 7:
-
-		#To filter the CMS Area plots
-		CMSAreas = ['BRIL',          'Collaboration Board',            'Communications',                 'DAQ',    
-			    'ECAL',          'Engagement Office',              'Extended Executive Board (XEB)', 'HCAL',
-			    'HGCAL',         'L1 Trigger',                     'Management Board',               'MTD',    
-			    'Muon detector', 'Offline Software and Computing', 'Physics coordination',           'PPD',
-			    'PPS',           'Regional Representative',        'Run coordination',               'Safety', 
-			    'Secretariat',   'Technical coordination',         'Tracker',                        'Trigger coordination',  'Other']
-	
-		for item in x:
-			for element in CMSAreas:
-				if element in item:		
-					Index = np.where(x == item)
-				
-					print('item = ', item)
-					print('element = ', element)
-					print('Index = ', Index)
-
-					for k in Index:
-						#print('x[k] = ', x[k])
-						#print('element = ', element)
-						#print('item = ', item)
-						#print('Index = ', Index)	
-						#print('y[k] = ', y[k])
-						#print('counts[k] = ', counts[k]) 
-						y_CMSAreas.append(y[k])
-						counts_CMSAreas.append(counts[k]) 
-
-		x = CMSAreas
-		y = y_CMSAreas
-		counts = counts_CMSAreas
-
-		#print('x (cms areas) = ', x)
-		#print('y (cms areas) = ', y)
-		#print('counts (cms areas) = ', counts)
-
-
-	index = 0
-	
-	counts_new = []
-	
-	#Converting to percentages
-	for i in x:
-		Total = df_original[df_original[Col1] == i].shape[0] #to get the total number of respondents for each category (e.g. each age category)
-		new_value = (counts[index]/Total) * 100
-		counts_new.append(new_value)
-		index += 1
-
 	if FirstColumnNumber != 7:
+
+		# Read the data file
+		df_original = pd.read_csv(filename)
+	
+		# Sort by the two relevant columns
+		df = df_original.sort_values(by=[Col1, Col2])
+
+		# Skim the dataframe
+		df = df[[Col1, Col2]]
+
+		# Count and remove duplicates
+		df = df.groupby(df.columns.tolist()).size().reset_index().rename(columns={0:"Counts"})
+
+		# Form an numpy array
+		np_arr = df.values
+
+		#print('np_arr = ',np_arr)
+
+		# Split into three
+		x = np_arr[:, 0]
+		y = np_arr[:, 1]
+		counts = np_arr[:, 2]
+
+		index = 0
+	
+		counts_new = []
+	
+		#Converting to percentages
+		for i in x:
+			Total = df_original[df_original[Col1] == i].shape[0] #to get the total number of respondents for each category (e.g. each age category)
+			new_value = (counts[index]/Total) * 100
+			counts_new.append(new_value)
+			index += 1
+
 		# Protection for nans
 		where_are_NaNs = pd.isna(x)
 		x[where_are_NaNs] = "nan"
 
+		# Make the plot
+		sc = plt.scatter(x, y, c=counts_new, cmap=matplotlib.cm.viridis, marker="s")
+
+	else:
+
+		# initialise empty data frame
+		new_responses = pd.DataFrame()
+
+		# go through each row of responses
+		for i in range(len(df_original)): 
+
+    			#select one row
+			row = df_original.iloc[i,:]
+
+    			# split their work areas into a list of values by splitting on the comma
+			work_areas = df_original.iloc[i,7].split(",")
+
+    			# some of the responses have an extra space, make sure to strip that so ' Ecal' and 'Ecal' are counted as the same
+			work_areas = [word.strip() for word in work_areas]
+
+    			# create a new temprary data frame that is a copy of the row in question repeated the same amount of times
+    			# as the length of their work area list 
+			tmp = pd.DataFrame([row]*len(work_areas))
+
+    			# now change the work area for that data frame into the list of work areas 
+			tmp.iloc[:,7] =  work_areas
+
+    			# append that data frame 
+			new_responses = new_responses.append(tmp)
+    
+		counts = new_responses.groupby([Col2, Col1]).agg({Col1:'count'})
+
 	# Make the plot
-	sc = plt.scatter(x, y, c=counts_new, cmap=matplotlib.cm.viridis, marker="s")
+	sc = plt.scatter(counts.index.get_level_values(1), counts.index.get_level_values(0), c=counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
 
 	# Cosmetics
 	plt.title(title + end)

@@ -393,7 +393,7 @@ def reader(filename):
 	# Read the data file
 	df_original = pd.read_csv(filename)
 
-	if FirstColumnNumber != 7:
+	if FirstColumnNumber != 7 and FirstColumnNumber != 8:
 
 		# Sort by the two relevant columns
 		df = df_original.sort_values(by=[Col1, Col2])
@@ -444,7 +444,7 @@ def reader(filename):
 			row = df_original.iloc[i,:]
 
     			# split their work areas into a list of values by splitting on the comma
-			work_areas = df_original.iloc[i,7].split(",")
+			work_areas = df_original.iloc[i,FirstColumnNumber].split(",")
 
     			# some of the responses have an extra space, make sure to strip that so ' Ecal' and 'Ecal' are counted as the same
 			work_areas = [word.strip() for word in work_areas]
@@ -454,7 +454,7 @@ def reader(filename):
 			tmp = pd.DataFrame([row]*len(work_areas))
 
     			# now change the work area for that data frame into the list of work areas 
-			tmp.iloc[:,7] =  work_areas
+			tmp.iloc[:,FirstColumnNumber] =  work_areas
 
     			# append that data frame 
 			new_responses = new_responses.append(tmp)

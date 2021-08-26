@@ -390,11 +390,11 @@ else:
 
 def reader(filename):
 
+	# Read the data file
+	df_original = pd.read_csv(filename)
+
 	if FirstColumnNumber != 7:
 
-		# Read the data file
-		df_original = pd.read_csv(filename)
-	
 		# Sort by the two relevant columns
 		df = df_original.sort_values(by=[Col1, Col2])
 

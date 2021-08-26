@@ -54,7 +54,7 @@ elif Col1 == '8. If you answered "other" for question 7, please list the area(s)
 	axis_label = 'CMS Area'
 	FirstColumnNumber = 8
 else:
-        print('ERROR: Check the --subset string. Exiting.')
+        print('ERROR: Check the string for the first column name. Exiting.')
         quit()
 
 
@@ -385,48 +385,111 @@ elif Col2 == "18. In general, how satisfied are you with the following aspects o
 	PdfTitleStart = "Satisfaction_StyleOfPresentation"
 	SecondColumnNumber = 91 
 else:
-	print('ERROR: Check the name of the column you want to compare to')
+	print('ERROR: Check the string for the second column name. Exiting.')
 	quit()
 
 def reader(filename):
 
-	df = pd.read_csv(filename)
-	df = df.sort_values(by=[Col1, Col2]) #filters for the chosen columns
+	# Read the data file
+	df_original = pd.read_csv(filename)
+	
+	# Sort by the two relevant columns
+	df = df_original.sort_values(by=[Col1, Col2])
 
+	# Skim the dataframe
+	df = df[[Col1, Col2]]
+
+	# Count and remove duplicates
+	df = df.groupby(df.columns.tolist()).size().reset_index().rename(columns={0:"Counts"})
+
+	# Form an numpy array
 	np_arr = df.values
 
-	x_1 = np_arr[:, FirstColumnNumber]
-	y_1 = np_arr[:, SecondColumnNumber]
+	#print('np_arr = ',np_arr)
 
-	print(' ')
-	print('x_1 = ', x_1)
-	print('y_1 = ', y_1)
-	print(' ')
-	print(' ')
-	print('x_1[0] = ', x_1[0])
-	print('y_1[0] = ', y_1[0])
-	print(' ')
+	# Split into three
+	x = np_arr[:, 0]
+	y = np_arr[:, 1]
+	counts = np_arr[:, 2]
 
-	where_are_NaNs = pd.isna(x_1)
-	x_1[where_are_NaNs] = 'nan'
+	y_CMSAreas = []
+	counts_CMSAreas = []
 
-	normalize = matplotlib.colors.Normalize(vmin=-1, vmax=1)
-	colormap = matplotlib.cm.viridis
+	#Need to complete this section to further filter the CMS areas plots
+	if FirstColumnNumber == 7:
+
+		#To filter the CMS Area plots
+		CMSAreas = ['BRIL',          'Collaboration Board',            'Communications',                 'DAQ',    
+			    'ECAL',          'Engagement Office',              'Extended Executive Board (XEB)', 'HCAL',
+			    'HGCAL',         'L1 Trigger',                     'Management Board',               'MTD',    
+			    'Muon detector', 'Offline Software and Computing', 'Physics coordination',           'PPD',
+			    'PPS',           'Regional Representative',        'Run coordination',               'Safety', 
+			    'Secretariat',   'Technical coordination',         'Tracker',                        'Trigger coordination',  'Other']
 	
-	sc = plt.scatter(x_1, y_1, norm=normalize, cmap=colormap, marker="s")
+		for item in x:
+			for element in CMSAreas:
+				if element in item:		
+					Index = np.where(x == item)
+				
+					print('item = ', item)
+					print('element = ', element)
+					print('Index = ', Index)
+
+					for k in Index:
+						#print('x[k] = ', x[k])
+						#print('element = ', element)
+						#print('item = ', item)
+						#print('Index = ', Index)	
+						#print('y[k] = ', y[k])
+						#print('counts[k] = ', counts[k]) 
+						y_CMSAreas.append(y[k])
+						counts_CMSAreas.append(counts[k]) 
+
+		x = CMSAreas
+		y = y_CMSAreas
+		counts = counts_CMSAreas
+
+		#print('x (cms areas) = ', x)
+		#print('y (cms areas) = ', y)
+		#print('counts (cms areas) = ', counts)
+
+
+	index = 0
+	
+	counts_new = []
+	
+	#Converting to percentages
+	for i in x:
+		Total = df_original[df_original[Col1] == i].shape[0] #to get the total number of respondents for each category (e.g. each age category)
+		new_value = (counts[index]/Total) * 100
+		counts_new.append(new_value)
+		index += 1
+
+	if FirstColumnNumber != 7:
+		# Protection for nans
+		where_are_NaNs = pd.isna(x)
+		x[where_are_NaNs] = "nan"
+
+	# Make the plot
+	sc = plt.scatter(x, y, c=counts_new, cmap=matplotlib.cm.viridis, marker="s")
+
+	# Cosmetics
 	plt.title(title + end)
 	plt.xlabel(axis_label)
-	plt.ylabel('Frequency')
+	plt.ylabel("Frequency")
 	plt.xticks(rotation = 90)
-	
-	cbar= plt.colorbar(sc)
-	cbar.set_label("Responses (normalised)", labelpad=+1)
 
+	# Colour bar
+	cbar= plt.colorbar(sc)
+	cbar.set_label("Responses (%)", labelpad=+5)
+
+	# Save the plot
 	if not os.path.exists('Results_ScatterPlots'):
 		os.mkdir('Results_ScatterPlots')
-
+	
 	os.chdir('Results_ScatterPlots')
-	plt.savefig('ScatterPlot_' + PdfTitleStart + '_' + PdfTitleEnd + '.pdf')
+	plt.savefig('ScatterPlot_' + PdfTitleStart + '_' + PdfTitleEnd + '.pdf', bbox_inches='tight')
+	
 
 if __name__ == '__main__':
 	reader('CMSInternalCommunicationsFeedbackForm.csv')

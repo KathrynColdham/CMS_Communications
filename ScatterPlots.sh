@@ -92,9 +92,9 @@ fi
 for i in ${!ColumnsArray[@]}; do
         python3 ScatterPlots.py --first '2. In which age range do you fall under?' --second "${ColumnsArray[i]}"
 	python3 ScatterPlots.py --first '3. Are you currently resident (>50%) at CERN?' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '4. If you are not resident at CERN, in which country are you based?' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '5. In which country is your home institute, if different from the country in which you are based?' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '7. Which of the following areas of CMS are you involved in? ' --second "${ColumnsArray[i]}"
-#	python3 ScatterPlots.py --first '8. If you answered "other" for question 7, please list the area(s) of CMS that you are involved in here.' --second "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --first '4. If you are not resident at CERN, in which country are you based?' --second "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --first '5. In which country is your home institute, if different from the country in which you are based?' --second "${ColumnsArray[i]}"
+	python3 ScatterPlots.py --first '6. Approximately, what was your percentage of presence at CERN before the COVID-19 pandemic began?' --second "${ColumnsArray[i]}"
+	#python3 ScatterPlots.py --first '7. Which of the following areas of CMS are you involved in? ' --second "${ColumnsArray[i]}"
+	#python3 ScatterPlots.py --first '8. If you answered "other" for question 7, please list the area(s) of CMS that you are involved in here.' --second "${ColumnsArray[i]}"
 done

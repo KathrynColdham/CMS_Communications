@@ -6,6 +6,7 @@ import numpy as np
 import argparse
 import os
 
+
 #input arguments
 parser = argparse.ArgumentParser()
 
@@ -407,8 +408,6 @@ def reader(filename):
 		# Form an numpy array
 		np_arr = df.values
 
-		#print('np_arr = ',np_arr)
-
 		# Split into three
 		x = np_arr[:, 0]
 		y = np_arr[:, 1]
@@ -422,6 +421,13 @@ def reader(filename):
 		for i in x:
 			Total = df_original[df_original[Col1] == i].shape[0] #to get the total number of respondents for each category (e.g. each age category)
 			new_value = (counts[index]/Total) * 100
+
+			if new_value > 100:
+				print('ERROR: the percentage value when comparing columns', Col1, ' and ', Col2, 'is: ', new_value)
+				quit()
+			else:
+				print('new_value = ', new_value)
+		
 			counts_new.append(new_value)
 			index += 1
 
@@ -440,6 +446,7 @@ def reader(filename):
 
 		x_values = []
 		x_keys = []
+		x_values_combinations = []
 
 		index_values = 0
 		index_values_2 = 0
@@ -449,6 +456,8 @@ def reader(filename):
 			if exists:
 				x_keys.append(index_values_2)
 			else:
+				x_values_combinations.append(value)
+
 				if index_values != 0:
 					index_values_2 += 1
 					x_keys.append(index_values_2)
@@ -480,13 +489,10 @@ def reader(filename):
 
 			y_values.append(value)
 
-		print('x_keys = ',x_keys)
-		print('y_keys = ',y_keys)
-		print('counts_new = ', counts_new)
-
 
 		# Make the plot
-		sc = plt.tricontourf(x_keys, y_keys, counts_new)
+		levels = np.linspace(0, 100, 11)
+		sc = plt.tricontourf(x_keys, y_keys, counts_new, levels=levels, extend='min')
 
 		#Change the labels for the x and y axes to strings
 		plt.xticks(x_keys, x_values)
@@ -532,6 +538,8 @@ def reader(filename):
 	plt.xlabel(axis_label)
 	plt.ylabel("Frequency")
 	plt.xticks(rotation = 90)
+
+	#ticks=np.linspace(0, 100, 10, endpoint=True)
 
 	# Colour bar
 	cbar= plt.colorbar(sc)

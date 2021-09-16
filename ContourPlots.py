@@ -394,7 +394,12 @@ def reader(filename):
 	# Read the data file
 	df_original = pd.read_csv(filename)
 
-	if FirstColumnNumber != 7 and FirstColumnNumber != 8:
+	SecondColumnNumberArray = np.array([60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70])
+
+	print('SecondColumnNumber = ', SecondColumnNumber)
+	print('np.any(SecondColumnNumberArray == SecondColumnNumber) = ', np.any(SecondColumnNumberArray == SecondColumnNumber))
+
+	if FirstColumnNumber != 7 and FirstColumnNumber != 8 and np.any(SecondColumnNumberArray == SecondColumnNumber) == False:
 
 		# Sort by the two relevant columns
 		df = df_original.sort_values(by=[Col1, Col2])
@@ -425,8 +430,6 @@ def reader(filename):
 			if new_value > 100:
 				print('ERROR: the percentage value when comparing columns', Col1, ' and ', Col2, 'is: ', new_value)
 				quit()
-			else:
-				print('new_value = ', new_value)
 		
 			counts_new.append(new_value)
 			index += 1
@@ -515,7 +518,7 @@ def reader(filename):
     			# some of the responses have an extra space, make sure to strip that so ' Ecal' and 'Ecal' are counted as the same
 			work_areas = [word.strip() for word in work_areas]
 
-    			# create a new temprary data frame that is a copy of the row in question repeated the same amount of times
+    			# create a new temporary data frame that is a copy of the row in question repeated the same amount of times
     			# as the length of their work area list 
 			tmp = pd.DataFrame([row]*len(work_areas))
 
@@ -530,8 +533,19 @@ def reader(filename):
 		# convert to percentage
 		new_counts = counts.groupby(level=1).apply(lambda x:100 * x / float(x.sum()))
 
+		print(' ')
+		print('new_counts = ', new_counts)
+		print(' ')
+
 		# Make the plot
-		sc = plt.scatter(new_counts.index.get_level_values(1), new_counts.index.get_level_values(0), c=new_counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
+		#sc = plt.scatter(new_counts.index.get_level_values(1), new_counts.index.get_level_values(0), c=new_counts.values.flatten(), cmap=plt.cm.viridis, marker="s")
+
+		levels = np.linspace(0, 100, 11)
+
+		print('new_counts.index.get_level_values(1) = ', new_counts.index.get_level_values(1))
+		print('new_counts.index.get_level_values(0) = ', new_counts.index.get_level_values(0))
+
+		sc = plt.tricontourf(new_counts.index.get_level_values(1), new_counts.index.get_level_values(0), new_counts.values.flatten(), levels=levels, extend='min')
 
 	# Cosmetics
 	plt.title(title + end)
@@ -548,10 +562,14 @@ def reader(filename):
 	# Save the plot
 	if not os.path.exists('Results_ContourPlots'):
 		os.mkdir('Results_ContourPlots')
-	
+
+	pdf_name = 'ContourPlot_' + PdfTitleStart + '_' + PdfTitleEnd + '.pdf'
+		
 	os.chdir('Results_ContourPlots')
-	plt.savefig('ContourPlot_' + PdfTitleStart + '_' + PdfTitleEnd + '.pdf', bbox_inches='tight')
+	plt.savefig(pdf_name, bbox_inches='tight')
 	
+	print('The file ', pdf_name, ' has been saved.')	
+
 
 if __name__ == '__main__':
 	reader('CMSInternalCommunicationsFeedbackForm.csv')
